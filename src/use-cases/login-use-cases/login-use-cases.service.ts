@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { HttpException, HttpStatus } from "@nestjs/common";
-import { Payload } from "src/domain/models/payload.interface";
-import { MessageError } from 'src/infrastructure/common/constants/message-error';
-import { LoginDTO } from "src/infrastructure/dto/login.dto";
-import { AuthService } from "src/infrastructure/services/auth/auth.service";
-import { UserService } from "src/infrastructure/services/user/user.service";
+import { Payload } from "../../domain/models/payload.interface";
+import { MessageError } from '../../infrastructure/common/constants/message-error';
+import { LoginDTO } from "../../infrastructure/dto/login.dto";
+import { AuthService } from "../../infrastructure/services/auth/auth.service";
+import { UserService } from "../../infrastructure/services/user/user.service";
 
 @Injectable()
 export class LoginUseCasesService {
@@ -26,7 +26,7 @@ export class LoginUseCasesService {
                 email: user.email
             }
             return {
-                acces_token: await this.authService.signPayload(payload)
+                access_token: await this.authService.signPayload(payload)
             }
         }
         else{

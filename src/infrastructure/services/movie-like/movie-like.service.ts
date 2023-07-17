@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { MovieLike } from 'src/domain/models/movie-like.interface';
-import { MessageError } from 'src/infrastructure/common/constants/message-error';
+import { MovieLike } from '../../../domain/models/movie-like.interface';
+import { MessageError } from '../../../infrastructure/common/constants/message-error';
 
 @Injectable()
 export class MovieLikeService {

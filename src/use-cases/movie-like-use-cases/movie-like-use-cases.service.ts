@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { MessageSucess } from 'src/infrastructure/common/constants/message-sucess';
-import { MovieLikeService } from 'src/infrastructure/services/movie-like/movie-like.service';
+import { MessageSucess } from '../../infrastructure/common/constants/message-sucess';
+import { MovieLikeService } from '../../infrastructure/services/movie-like/movie-like.service';
 
 @Injectable()
 export class MovieLikeUseCasesService {
@@ -19,7 +19,7 @@ export class MovieLikeUseCasesService {
             await this.movieLikeService.create(movieId);
         }
         return {
-            mensage: MessageSucess.LIKE_RECORDED_SUCCESS
+            mensagem: MessageSucess.LIKE_RECORDED_SUCCESS
         }
     }
 

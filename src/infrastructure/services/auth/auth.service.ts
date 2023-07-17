@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { sign } from 'jsonwebtoken';
 import { UserService } from '../user/user.service';
-import { Payload } from 'src/domain/models/payload.interface';
+import { Payload } from '../../../domain/models/payload.interface';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()

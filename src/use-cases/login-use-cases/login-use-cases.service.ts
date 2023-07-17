@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpException, HttpStatus } from "@nestjs/common";
 import { Payload } from "src/domain/models/payload.interface";
+import { MessageError } from 'src/infrastructure/common/constants/message-error';
 import { LoginDTO } from "src/infrastructure/dto/login.dto";
 import { AuthService } from "src/infrastructure/services/auth/auth.service";
 import { UserService } from "src/infrastructure/services/user/user.service";
@@ -18,7 +19,7 @@ export class LoginUseCasesService {
         const { email, password } = loginDTO;
         const user = await this.userService.find(email);
         if(!user){
-            throw new HttpException('Usuário não existe', HttpStatus.BAD_REQUEST);
+            throw new HttpException(MessageError.USER_NOT_FOUND, HttpStatus.BAD_REQUEST);
         }
         if(await this.authService.validatePassword(password, user.password)){            
             const payload: Payload = {
@@ -29,7 +30,7 @@ export class LoginUseCasesService {
             }
         }
         else{
-            throw new HttpException('Credenciais inválidas', HttpStatus.FORBIDDEN)
+            throw new HttpException(MessageError.INVALID_CREDENTIALS, HttpStatus.FORBIDDEN)
         }
     }
 }

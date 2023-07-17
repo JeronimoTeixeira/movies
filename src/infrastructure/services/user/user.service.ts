@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'src/domain/models/user.interface';
+import { MessageError } from 'src/infrastructure/common/constants/message-error';
 import { UserDTO } from 'src/infrastructure/dto/user.dto';
 
 @Injectable()
@@ -17,7 +18,7 @@ export class UserService {
             return createdUser
         }
         catch(exception){
-            throw new HttpException('Ocorreu um erro ao registrar o usuário, aguarde alguns instantes e tente novamente.', HttpStatus.BAD_REQUEST);
+            throw new HttpException(MessageError.ERROR_REGISTERING_USER, HttpStatus.BAD_REQUEST);
         }
       }
 
@@ -27,7 +28,7 @@ export class UserService {
           return user;
         }
         catch(exception) {
-          throw new HttpException('Ocorreu um erro ao procurar o usuário, aguarde alguns instantes e tente novamente.', HttpStatus.BAD_REQUEST);
+          throw new HttpException(MessageError.ERROR_SEARCHING_USER, HttpStatus.BAD_REQUEST);
         }
       }
 }

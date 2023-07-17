@@ -10,6 +10,9 @@ import { LoginController } from './infrastructure/controllers/login/login.contro
 import { UserController } from './infrastructure/controllers/user/user.controller';
 import { LoginUseCasesModule } from './use-cases/login-use-cases/login-use-cases.module';
 import { UserUseCasesModule } from './use-cases/user-use-cases/user-use-cases.module';
+import { MovieLikeUseCasesModule } from './use-cases/movie-like-use-cases/movie-like-use-cases.module';
+import { MovieLikeController } from './infrastructure/controllers/movie-like/movie-like.controller';
+import { JwtStrategy } from './infrastructure/common/strategies/jwt.strategy';
 
 
 @Module({
@@ -20,9 +23,10 @@ import { UserUseCasesModule } from './use-cases/user-use-cases/user-use-cases.mo
     MovieLikeModule,
     AuthModule,
     LoginUseCasesModule,
-    UserUseCasesModule
+    UserUseCasesModule,
+    MovieLikeUseCasesModule
   ],
-  controllers: [AppController, UserController, LoginController],
-  providers: [AppService],
+  controllers: [AppController, UserController, LoginController, MovieLikeController],
+  providers: [AppService, JwtStrategy],
 })
 export class AppModule {}

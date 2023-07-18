@@ -26,7 +26,7 @@ export class LoginUseCasesService {
                 email: user.email
             }
             return {
-                access_token: await this.authService.signPayload(payload)
+                token: await this.authService.signPayload(payload)
             }
         }
         else{

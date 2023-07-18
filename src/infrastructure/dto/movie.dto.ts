@@ -1,6 +1,4 @@
-import { Document } from 'mongoose';
-
-export interface MovieLike extends Document {
+export interface MovieDTO {
     id: string;
     vote_count: number;
     title: string;

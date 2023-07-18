@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { MovieLike } from '../../../domain/models/movie-like.interface';
 import { MessageError } from '../../../infrastructure/common/constants/message-error';
+import { MovieDTO } from 'src/infrastructure/dto/movie.dto';
 
 @Injectable()
 export class MovieLikeService {
@@ -11,13 +12,9 @@ export class MovieLikeService {
         @InjectModel('MovieLike') private movieLikeModel: Model<MovieLike>,
       ) {}
 
-    async create(movieId: string):Promise<MovieLike>{
+    async create(movieDTO: MovieDTO):Promise<MovieLike>{
         try{
-            const movieLike = {
-                movieId: movieId,
-                likes: 1
-            }         
-            const createdMovieLike = new this.movieLikeModel(movieLike);
+            const createdMovieLike = new this.movieLikeModel(movieDTO);
             await createdMovieLike.save();
             return createdMovieLike
         }
@@ -27,18 +24,18 @@ export class MovieLikeService {
         }
     }
 
-    async find(movieId: string):Promise<MovieLike>{
+    async find(id: string):Promise<MovieLike>{
         try{
-            return await this.movieLikeModel.findOne({ movieId })
+            return await this.movieLikeModel.findOne({ id })
         }
         catch(exception){
             throw new HttpException(MessageError.ERROR_SEARCHING_MOVIE, HttpStatus.BAD_REQUEST);
         }
     }
 
-    async update(movieId: string, movieLike: MovieLike):Promise<MovieLike>{
+    async update(id: string, movieLike: MovieLike):Promise<MovieLike>{
         try{
-            return await this.movieLikeModel.findOneAndUpdate({ movieId }, movieLike)
+            return await this.movieLikeModel.findOneAndUpdate({ id }, movieLike)
         }
         catch(exception){
             throw new HttpException(MessageError.ERROR_SEARCHING_MOVIE, HttpStatus.BAD_REQUEST);
@@ -47,7 +44,7 @@ export class MovieLikeService {
 
     async findAll():Promise<Array<MovieLike>>{
         try{
-            return await this.movieLikeModel.find();
+            return (await this.movieLikeModel.find().sort('vote_count')).reverse()
         }
         catch(exception){
             throw new HttpException(MessageError.ERROR_SEARCHING_ALL_MOVIE, HttpStatus.BAD_REQUEST);

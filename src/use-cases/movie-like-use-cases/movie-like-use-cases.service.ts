@@ -11,13 +11,8 @@ export class MovieLikeUseCasesService {
 
     async movieLike(movieId: string){
         const movieLike = await this.movieLikeService.find(movieId);
-        if(movieLike){
-            movieLike.likes++;
-            await this.movieLikeService.update(movieLike.movieId, movieLike);
-        }
-        else{
-            await this.movieLikeService.create(movieId);
-        }
+        movieLike.vote_count++;
+        await this.movieLikeService.update(movieLike.id, movieLike);
         return {
             mensagem: MessageSucess.LIKE_RECORDED_SUCCESS
         }

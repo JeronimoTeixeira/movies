@@ -13,6 +13,9 @@ import { UserUseCasesModule } from './use-cases/user-use-cases/user-use-cases.mo
 import { MovieLikeUseCasesModule } from './use-cases/movie-like-use-cases/movie-like-use-cases.module';
 import { MovieLikeController } from './infrastructure/controllers/movie-like/movie-like.controller';
 import { JwtStrategy } from './infrastructure/common/strategies/jwt.strategy';
+import { ThemovieModule } from './infrastructure/services/themovie/themovie.module';
+import { MoviesUseCaseModule } from './use-cases/movies-use-case/movies-use-case.module';
+import { PopularMovieController } from './infrastructure/controllers/popular-movie/popular-movie.controller';
 
 
 @Module({
@@ -24,9 +27,11 @@ import { JwtStrategy } from './infrastructure/common/strategies/jwt.strategy';
     AuthModule,
     LoginUseCasesModule,
     UserUseCasesModule,
-    MovieLikeUseCasesModule
+    MovieLikeUseCasesModule,
+    ThemovieModule,
+    MoviesUseCaseModule
   ],
-  controllers: [AppController, UserController, LoginController, MovieLikeController],
+  controllers: [AppController, UserController, LoginController, MovieLikeController, PopularMovieController],
   providers: [AppService, JwtStrategy],
 })
 export class AppModule {}
